@@ -11,7 +11,7 @@ data "vsphere_compute_cluster" "cluster" {
 
 # Get the VMware vSphere datastore cluster data
 data "vsphere_datastore_cluster" "items" {
-  for_each      = var.vms
+  for_each = var.vms
 
   name          = each.value.vmware_datastore_cluster
   datacenter_id = data.vsphere_datacenter.datacenter.id
@@ -30,7 +30,7 @@ data "vsphere_content_library" "library" {
 
 # Data source for vCenter Content Library Item
 data "vsphere_content_library_item" "items" {
-  for_each   = var.vms
+  for_each = var.vms
 
   name       = each.value.vmware_content_library_item
   type       = var.vmware_content_library_item_type
