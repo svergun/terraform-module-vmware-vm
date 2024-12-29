@@ -13,7 +13,7 @@ data "vsphere_compute_cluster" "cluster" {
 data "vsphere_datastore_cluster" "datastore_clusters" {
   for_each      = var.vms
   name          = each.value.vmware_datastore_cluster
-  # datacenter_id = data.vsphere_datacenter.datacenter.id
+  datacenter_id = data.vsphere_datacenter.datacenter.id
 }
 
 # Get the VMware vSphere network data
