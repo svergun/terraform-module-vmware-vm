@@ -33,10 +33,10 @@ variable "vmware_content_library_item_type" {
   description = "The vCenter content library item type to use"
 }
 
-variable "vmware_tag_category" {
-  type        = string
-  description = "The vCenter tag category to use"
-}
+# variable "vmware_tag_category" {
+#   type        = string
+#   description = "The vCenter tag category to use"
+# }
 
 variable "vm_folder" {
   type        = string
