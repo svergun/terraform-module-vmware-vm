@@ -4,7 +4,8 @@ resource "vsphere_virtual_machine" "vm" {
 
   name                       = each.value.vm_name
   resource_pool_id           = data.vsphere_compute_cluster.cluster.resource_pool_id
-  datastore_id               = data.vsphere_datastore_cluster.datastore_cluster.id
+  # datastore_id               = data.vsphere_datastore_cluster.datastore_cluster.id
+  datastore_id               = data.vsphere_datastore_cluster.datastore_clusters[each.key].id
   folder                     = var.vm_folder
   wait_for_guest_net_timeout = var.vm_guest_net_timeout
   num_cpus                   = each.value.vm_num_cpus
