@@ -4,8 +4,7 @@ resource "vsphere_virtual_machine" "vm" {
 
   name                       = each.value.vm_name
   resource_pool_id           = data.vsphere_compute_cluster.cluster.resource_pool_id
-  # datastore_id               = data.vsphere_datastore_cluster.datastore_cluster.id
-  datastore_id               = data.vsphere_datastore_cluster.datastore_clusters[each.key].id
+  datastore_id               = data.vsphere_datastore_cluster.items[each.key].id
   folder                     = var.vm_folder
   wait_for_guest_net_timeout = var.vm_guest_net_timeout
   num_cpus                   = each.value.vm_num_cpus
@@ -16,10 +15,6 @@ resource "vsphere_virtual_machine" "vm" {
     size             = each.value.vm_disk_size
     thin_provisioned = each.value.vm_disk_thin_provisioned
   }
-
-  # clone {
-  #   template_uuid = data.vsphere_content_library_item.item.id
-  # }
 
   clone {
     template_uuid = data.vsphere_content_library_item.items[each.key].id
