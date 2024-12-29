@@ -1,24 +1,3 @@
-variable "vmware_vcenter_server" {
-  type        = string
-  description = "The vCenter server to connect to"
-}
-
-variable "vmware_vcenter_user" {
-  type        = string
-  description = "The username for the vCenter user"
-}
-
-variable "vmware_vcenter_password" {
-  type        = string
-  description = "The password for the vCenter user"
-}
-
-variable "vmware_unverified_ssl" {
-  type        = bool
-  description = "Whether or not to skip SSL verification"
-  default     = false
-}
-
 variable "vmware_datacenter" {
   type        = string
   description = "The vCenter datacenter to use"
@@ -52,6 +31,11 @@ variable "vmware_content_library_item" {
 variable "vmware_content_library_item_type" {
   type        = string
   description = "The vCenter content library item type to use"
+}
+
+variable "vmware_tag_category" {
+  type        = string
+  description = "The vCenter tag category to use"
 }
 
 variable "vm_folder" {
