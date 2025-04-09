@@ -24,4 +24,5 @@ resource "vsphere_virtual_machine" "vm" {
     network_id = data.vsphere_network.network.id
   }
 
+  custom_attributes = each.value.vm_tags
 }
