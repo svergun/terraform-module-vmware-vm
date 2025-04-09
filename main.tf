@@ -11,10 +11,12 @@ resource "vsphere_virtual_machine" "vm" {
   num_cpus                   = each.value.vm_num_cpus
   memory                     = each.value.vm_memory
 
+  # Add VM notes/annotations
+  annotation                 = lookup(each.value, "vm_notes", "Deployed with Terraform")
 
-  # Apply tags directly to the VM resource
+  # Add VM tags
   tags = [
-    for tag_category, tag_name in lookup(each.value, "vm_tags", {}) : 
+    for tag_category, tag_name in lookup(each.value, "vm_tags", {}) :
       data.vsphere_tag.tags["${tag_category}-${tag_name}"].id
   ]
 
