@@ -24,5 +24,23 @@ resource "vsphere_virtual_machine" "vm" {
     network_id = data.vsphere_network.network.id
   }
 
-  custom_attributes = each.value.vm_tags
+}
+
+#Apply tags to the VM
+resource "vsphere_tag_association" "vm_tags" {
+  for_each = flatten([
+    for vm_key, vm in var.vms : [
+      for tag_key, tag_value in vm.vm_tags : {
+        vm_id     = vsphere_virtual_machine.vm[vm_key].id
+        tag_key   = tag_key
+        tag_value = tag_value
+        vm_key    = vm_key
+      }
+    ]
+  ])
+  # Use the vsphere_tag data source to get the tag ID
+  tag_ids = [
+    vsphere_tag.tags[format("%s_%s", each.value.tag_key, each.value.tag_value)].id
+  ]
+  object_id = each.value.vm_id
 }
