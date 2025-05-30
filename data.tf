@@ -51,7 +51,7 @@ data "vsphere_tag" "tags" {
     for tag in flatten([
       for vm_key, vm in var.vms : [
         for tag_category, tag_name in lookup(vm, "vm_tags", {}) : {
-          key = "${tag_category}-${tag_name}"
+          key = "${vm_key}-${tag_category}-${tag_name}"
           category_id = data.vsphere_tag_category.categories[tag_category].id
           name = tag_name
         }
