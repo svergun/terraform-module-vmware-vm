@@ -17,7 +17,7 @@ resource "vsphere_virtual_machine" "vm" {
   # Add VM tags
   tags = [
     for tag_category, tag_name in lookup(each.value, "vm_tags", {}) :
-      data.vsphere_tag.tags["${tag_category}-${tag_name}"].id
+      data.vsphere_tag.tags["${each.key}-${tag_category}-${tag_name}"].id
   ]
 
   disk {
